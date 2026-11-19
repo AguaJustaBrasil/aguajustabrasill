@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="pt-br"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Água Justa — Preencher solicitação</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#102d46;color:#f4f9fc;font-family:Arial,sans-serif;padding:16px}
+main{max-width:620px;margin:auto}.box{background:#194563;padding:16px;border-radius:14px;margin:12px 0;border-left:6px solid #55a6cf}
+h1,h2{text-align:center;color:#fff}.campo{margin:10px 0}.campo label{display:block;font-weight:bold;margin-bottom:5px}
+input,textarea,select{width:100%;padding:12px;border-radius:10px;border:1px solid #b8cbd8;font-size:16px;background:#fff;color:#172b3d}
+textarea{min-height:100px}button{width:100%;padding:14px;margin-top:10px;border:0;border-radius:12px;background:#0B3D91;color:#fff;font-weight:bold;font-size:16px}
+.sec{background:#334155}.aviso{background:#59491f;border-left-color:#e0b94d}.ok{background:#174c43;border-left-color:#48b68d}
+#resultado{display:none;background:#fff;color:#172b3d;padding:20px;border-radius:14px;margin-top:16px}
+#resultado h2{color:#0B3D91}.linha{border-bottom:1px solid #cbd5e1;padding:7px 0}
+@media print{body{background:#fff;color:#172b3d;padding:0}.no-print{display:none!important}#resultado{display:block!important;border-radius:0;margin:0}.box{display:none!important}}
+</style></head><body><main>
+<h1>📝 Preencher solicitação</h1>
+<div class="box aviso"><b>🔒 Segurança:</b> este formulário foi projetado para gerar o documento no seu aparelho. Não informe senha, código de SMS, senha do gov.br, cartão, Pix ou dados bancários. O Água Justa é independente.</div>
+<div class="box no-print"><a href="../privacidade.html" style="color:#bfe6ff">🔐 Ler privacidade e segurança</a></div>
+<div class="box no-print">
+<div class="campo"><label>Tipo de solicitação</label><select id="tipo">
+<option>Revisão de fatura</option><option>Revisão de consumo medido/faturado</option><option>Verificação de leitura</option><option>Inspeção/aferição do hidrômetro</option><option>Correção cadastral</option><option>Revisão de categoria/economias</option><option>Esclarecimento sobre cobrança de esgoto</option><option>Análise de consumo atípico/vazamento</option><option>Crédito/restituição</option><option>Reanálise de resposta administrativa</option><option>Detalhamento da fatura</option><option>Histórico de consumo</option><option>Regularização cadastral</option><option>Inspeção/vistoria</option><option>Resultado/registro de serviço</option></select></div>
+<div class="campo"><label>Nome do solicitante (opcional)</label><input id="nome" autocomplete="off"></div>
+<div class="campo"><label>Endereço do imóvel/ligação (somente se necessário)</label><input id="endereco" autocomplete="off"></div>
+<div class="campo"><label>Fatura/período/protocolo, se aplicável</label><input id="referencia" autocomplete="off"></div>
+<div class="campo"><label>Descrição do pedido</label><textarea id="descricao" placeholder="Explique objetivamente o que aconteceu e o que você deseja que seja conferido."></textarea></div>
+<div class="campo"><label>Documentos que acompanharão o pedido</label><textarea id="anexos" placeholder="Ex.: fatura, foto do hidrômetro, protocolo anterior..."></textarea></div>
+<div class="campo"><label><input type="checkbox" id="confirmo" style="width:auto"> Li o aviso de segurança e conferi que não incluí senha, código de autenticação ou dados bancários.</label></div>
+<button onclick="gerar()">Gerar documento</button>
+</div>
+<div id="resultado">
+<h2>ÁGUA JUSTA 💧⚖️</h2><p><b>REQUERIMENTO ADMINISTRATIVO</b></p>
+<div class="linha"><b>Tipo:</b> <span id="r_tipo"></span></div>
+<div class="linha"><b>Solicitante:</b> <span id="r_nome"></span></div>
+<div class="linha"><b>Endereço:</b> <span id="r_end"></span></div>
+<div class="linha"><b>Referência:</b> <span id="r_ref"></span></div>
+<h3>Descrição</h3><p id="r_desc"></p>
+<h3>Documentos anexos</h3><p id="r_anexos"></p>
+<p style="margin-top:30px">Local e data: ______________________________________________</p>
+<p>Assinatura: _________________________________________________</p>
+<p style="font-size:11px;color:#64748b">Modelo independente. Confira o canal oficial e os dados antes do envio.</p>
+</div>
+<div class="no-print"><button onclick="window.print()">📄 Imprimir / Salvar em PDF</button><button class="sec" onclick="history.back()">⬅️ Voltar</button></div>
+<script>
+function val(id){return document.getElementById(id).value.trim()}
+function gerar(){
+ if(!document.getElementById('confirmo').checked){alert('Confirme o aviso de segurança antes de gerar o documento.');return}
+ document.getElementById('r_tipo').textContent=val('tipo')||'Não informado';
+ document.getElementById('r_nome').textContent=val('nome')||'Não informado';
+ document.getElementById('r_end').textContent=val('endereco')||'Não informado';
+ document.getElementById('r_ref').textContent=val('referencia')||'Não informado';
+ document.getElementById('r_desc').textContent=val('descricao')||'Não informado';
+ document.getElementById('r_anexos').textContent=val('anexos')||'Nenhum informado';
+ document.getElementById('resultado').style.display='block';
+ document.getElementById('resultado').scrollIntoView({behavior:'smooth'});
+}
+</script></main></body></html>
