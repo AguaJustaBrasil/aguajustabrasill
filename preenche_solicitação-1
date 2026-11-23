@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Água Justa — Solicitação online</title>
+<style>
+body{margin:0;background:#102d46;color:#f1f7fb;font-family:Arial,sans-serif}
+main{max-width:620px;margin:auto;padding:22px}
+.card{background:#173e5b;border-radius:16px;padding:20px;box-shadow:0 6px 18px #0006}
+h1{text-align:center;color:#fff} h2{color:#d9efff}
+label{display:block;font-weight:bold;margin:12px 0 5px}
+input,textarea,select{width:100%;box-sizing:border-box;padding:12px;border-radius:10px;border:1px solid #b8cbd8;font-size:16px}
+textarea{min-height:120px}
+button{width:100%;padding:14px;margin-top:16px;border:0;border-radius:12px;background:linear-gradient(135deg,#0B3D91,#1f8f4c);color:#fff;font-weight:bold;font-size:16px}
+.nota{font-size:13px;color:#c3d6e3;line-height:1.5}
+</style>
+</head>
+<body>
+<main>
+<div class="card">
+<h1>💧⚖️ ÁGUA JUSTA</h1>
+<h2>Solicitação online — revisão de fatura</h2>
+<p class="nota">Modelo independente de apoio ao consumidor. Preencha as informações e utilize o procedimento/canal oficial competente para protocolar a solicitação.</p>
+<form onsubmit="enviar(event)">
+<label>Nome / responsável</label><input id="nome" required>
+<label>RGI / Fornecimento</label><input id="rgi">
+<label>Município</label><input id="municipio">
+<label>Referência da fatura</label><input id="referencia">
+<label>Valor cobrado</label><input id="valor">
+<label>Motivo</label>
+<select id="motivo">
+<option>Divergência de leitura / consumo</option>
+<option>Suspeita de vazamento ou consumo atípico</option>
+<option>Divergência de categoria / economias</option>
+<option>Divergência de cobrança de esgoto</option>
+<option>Tarifa / enquadramento a conferir</option>
+<option>Outro</option>
+</select>
+<label>Descrição / pedido</label><textarea id="descricao" required></textarea>
+<button type="submit">📄 Gerar solicitação para impressão</button>
+</form>
+<p id="status" class="nota"></p>
+</div>
+</main>
+<script>
+function enviar(e){
+ e.preventDefault();
+ const texto =
+ `ÁGUA JUSTA — SOLICITAÇÃO DE REVISÃO DE FATURA\n\n`+
+ `Nome: ${document.getElementById('nome').value}\n`+
+ `RGI/Fornecimento: ${document.getElementById('rgi').value}\n`+
+ `Município: ${document.getElementById('municipio').value}\n`+
+ `Referência: ${document.getElementById('referencia').value}\n`+
+ `Valor cobrado: ${document.getElementById('valor').value}\n`+
+ `Motivo: ${document.getElementById('motivo').value}\n\n`+
+ `Descrição/pedido:\n${document.getElementById('descricao').value}\n\n`+
+ `Documento independente de apoio. Apresente ao canal oficial competente.`;
+ const w=window.open('','_blank');
+ if(w){
+   w.document.write('<pre style="font:14px Arial;white-space:pre-wrap;padding:30px">'+
+     texto.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')+
+     '</pre><button onclick="window.print()" style="padding:12px 20px">Imprimir</button>');
+   w.document.close();
+   document.getElementById('status').textContent='Solicitação gerada em nova janela.';
+ }else{
+   document.getElementById('status').textContent='O navegador bloqueou a nova janela. Permita pop-ups para gerar a solicitação.';
+ }
+}
+</script>
+</body>
+</html>
