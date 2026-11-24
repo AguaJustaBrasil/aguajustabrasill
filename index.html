@@ -31,17 +31,6 @@ input,select,textarea{padding:13px;font-size:16px;border-radius:12px;border:1px 
 textarea{resize:vertical;min-height:80px}input:focus,select:focus,textarea:focus{border-color:#0B3D91;box-shadow:0 0 8px #0b3d913f}
 button{width:100%;padding:14px;margin-top:10px;border:0;border-radius:12px;background:linear-gradient(135deg,#0B3D91,#1f8f4c);color:#fff;font-size:16px;font-weight:bold;cursor:pointer;min-height:52px;box-shadow:0 4px 10px #0000002e}
 button:disabled{opacity:.55;cursor:not-allowed}
-.acoes-relatorio{display:flex;flex-direction:column;gap:10px;margin-top:16px;padding:14px;border:2px solid #4f8fb5;border-radius:14px;background:#123a55;box-shadow:0 4px 14px #0005}
-.acoes-relatorio .titulo-acoes{margin:0 0 2px;color:#fff;text-align:center;font-size:16px;font-weight:700}
-.acoes-relatorio .btn-acao{display:block!important;width:100%!important;min-height:54px!important;margin:0!important;padding:14px 16px!important;border:0!important;border-radius:12px!important;background:linear-gradient(135deg,#0B3D91,#1f8f4c)!important;color:#fff!important;font-size:16px!important;font-weight:700!important;line-height:1.25!important;text-align:center!important;cursor:pointer!important;box-shadow:0 4px 10px #0000002e!important;visibility:visible!important}
-.acoes-relatorio .btn-acao.secundario{background:#245574!important}
-.acoes-relatorio .btn-acao.bloqueado{background:#5b6570!important;color:#e7edf2!important;opacity:.75!important}
-.acoes-relatorio .btn-acao:disabled{opacity:.75!important;cursor:not-allowed!important}
-@media print{.acoes-relatorio{display:none!important}}
-.acoes-relatorio button.btn-acao{appearance:none;-webkit-appearance:none;display:block!important;position:relative!important;z-index:5!important;visibility:visible!important;opacity:1!important;}
-.acoes-relatorio button.btn-acao.bloqueado{opacity:.75!important;background:#5b6570!important;}
-.acoes-relatorio button.btn-acao:not(:disabled){cursor:pointer!important;}
-.acoes-relatorio button.btn-acao:disabled{cursor:not-allowed!important;}
 .nav{display:flex;gap:10px}.box{background:#194563;color:#f4f9fc;padding:12px;border-left:5px solid #55a6cf;border-radius:12px;margin-top:12px;box-shadow:0 4px 14px #0005;overflow-wrap:anywhere}
 .azul-cenario{background:#173e5b;border:2px solid #4b9bd0;border-left:8px solid #2563a6;color:#f4f9fc}
 .verde-cenario,.verde{background:#174c43;border:2px solid #48b68d;border-left:8px solid #168447;color:#f4fff9}
@@ -178,13 +167,10 @@ button:disabled{opacity:.55;cursor:not-allowed}
 <div class="box no-print">
 <b>📌 Próximos passos</b><br>
 <small>Depois de conferir o relatório, você pode salvá-lo em PDF ou utilizar os modelos independentes de solicitação do Água Justa.</small>
-<div class="acoes-relatorio" aria-label="Ações do relatório final">
-<div class="titulo-acoes">🎛️ PORTAS DE ACESSO DO RELATÓRIO</div>
-<button type="button" class="btn-acao" id="btnImprimirRelatorio" onclick="window.print()">📄 Imprimir / Salvar relatório em PDF</button>
-<button type="button" class="btn-acao bloqueado acesso-bloqueado" id="btnSolicitarPDF" data-open-url="AJ-RQ-001-revisao-fatura.pdf" onclick="abrirSolicitacao(this.dataset.openUrl)">🔒 Solicitar revisão da fatura — modelo PDF</button>
-<button type="button" class="btn-acao bloqueado acesso-bloqueado" id="btnSolicitacaoOnline" data-open-url="preenche_solicitação.html" onclick="abrirSolicitacao(this.dataset.openUrl)">🔒 Preencher solicitação online</button>
+<button type="button" onclick="window.print()">📄 Imprimir / Salvar relatório em PDF</button>
+<button type="button" id="btnSolicitarPDF" class="acesso-bloqueado" onclick="abrirSolicitacao('AJ-RQ-001-revisao-fatura.pdf')">🔒 Solicitar revisão da fatura — modelo PDF</button>
+<button type="button" id="btnSolicitacaoOnline" class="acesso-bloqueado" onclick="abrirSolicitacao('preenche_solicitação.html')">🔒 Preencher solicitação online</button>
 <div id="statusSolicitacoesT5" class="status-pagamento">🔒 Os documentos de solicitação serão liberados somente após a confirmação do Pix.</div>
-</div>
 </div>
 <button class="no-print secundario" onclick="nextTela(10)">⬅️ Voltar à conferência A × B</button>
 </section>
@@ -215,8 +201,8 @@ button:disabled{opacity:.55;cursor:not-allowed}
 <div class="box azul-cenario"><b>Materiais educativos</b><br>Abra a biblioteca de panfletos para escolher o assunto e abrir o PDF correspondente.
 <button onclick="abrirLink('panfletos/index.html')">📚 Abrir panfletos</button></div>
 <div class="box verde-cenario"><b>📝 Documentos de solicitação</b><br>Modelos independentes para baixar e preencher no aparelho.
-<button type="button" id="btnSolicitarPDFT6" class="btn-acao acesso-bloqueado" data-open-url="AJ-RQ-001-revisao-fatura.pdf">🔒 Modelo de revisão da fatura — PDF</button>
-<button type="button" id="btnSolicitacaoOnlineT6" class="btn-acao acesso-bloqueado" data-open-url="preenche_solicitação.html">🔒 Preencher solicitação online</button>
+<button type="button" id="btnSolicitarPDFT6" class="acesso-bloqueado" onclick="abrirSolicitacao('AJ-RQ-001-revisao-fatura.pdf')">🔒 Modelo de revisão da fatura — PDF</button>
+<button type="button" id="btnSolicitacaoOnlineT6" class="acesso-bloqueado" onclick="abrirSolicitacao('preenche_solicitação.html')">🔒 Preencher solicitação online</button>
 <div id="statusSolicitacoesT6" class="status-pagamento">🔒 Liberados somente após a confirmação do Pix.</div>
 </div>
 <div class="box"><b>🔒 Privacidade e segurança</b><br>O formulário online foi pensado para gerar o documento no próprio aparelho, sem envio automático dos dados ao Água Justa nesta versão.
@@ -261,24 +247,11 @@ function nextTela(n){
  */
 function abrirLink(url){
  try{
-  const destino=new URL(url,document.baseURI).href;
-  const w=window.open(destino,"_blank","noopener,noreferrer");
-  if(!w)window.location.href=destino;
+  const w=window.open(url,"_blank","noopener,noreferrer");
+  if(!w)window.location.href=url;
  }catch(e){
-  try{window.location.href=new URL(url,document.baseURI).href;}catch(_){window.location.href=url;}
+  window.location.href=url;
  }
-}
-function vincularBotoesDeAcesso(){
- const imprimir=document.getElementById("btnImprimirRelatorio");
- if(imprimir&&!imprimir.dataset.vinculado){
-  imprimir.addEventListener("click",()=>window.print());
-  imprimir.dataset.vinculado="sim";
- }
- document.querySelectorAll("button[data-open-url]").forEach(btn=>{
-  if(btn.dataset.vinculado || btn.getAttribute("onclick"))return;
-  btn.addEventListener("click",()=>abrirSolicitacao(btn.dataset.openUrl));
-  btn.dataset.vinculado="sim";
- });
 }
 
 /*
@@ -323,7 +296,6 @@ function atualizarAcessoSolicitacoes(){
   if(!el)return;
   el.disabled=!liberado;
   el.classList.toggle("acesso-bloqueado",!liberado);
-  el.classList.toggle("bloqueado",!liberado);
   el.textContent=(liberado?"🔓 ":"🔒 ")+texto;
  });
  const statusT5=document.getElementById("statusSolicitacoesT5");
@@ -520,6 +492,15 @@ function abCenario(p){
  return{prefix:p,regional:abTexto(p+"_regional"),municipio:abTexto(p+"_municipio"),ligacao:abTexto(p+"_ligacao"),categoria:abTexto(p+"_categoria"),economias:abNumero(p+"_economias"),comerciais:abNumero(p+"_comerciais"),industriais:abNumero(p+"_industriais"),conexao:abTexto(p+"_conexao"),rede:abTexto(p+"_rede"),destino:abTexto(p+"_destino"),hidrometro:abTexto(p+"_hidrometro"),li:abNumero(p+"_li"),lf:abNumero(p+"_lf"),di:abTexto(p+"_di"),df:abTexto(p+"_df"),historico:abNumero(p+"_historico"),moradores:p==="b"?abNumero("b_moradores"):NaN,desempregados:p==="b"?abNumero("b_desempregados"):NaN,renda:p==="b"?abNumero("b_renda"):NaN,aguaFatura:p==="a"?abNumero("a_agua_fatura"):NaN,esgotoFatura:p==="a"?abNumero("a_esgoto_fatura"):NaN,totalFatura:p==="a"?abNumero("a_total_fatura"):NaN,tributos:p==="a"?abNumero("a_tributos"):NaN,obs:abTexto(p+"_obs"),tipoLeitura:p==="a"?abSelect("a_tipo_leitura"):""};
 }
 function abValidarNumeros(c){
+ const ligacoes=["agua","agua_esgoto","esgoto"],binarios=["sim","nao","nao_informado"];
+ if(!c.regional)return"Informe a Unidade de Negócio.";
+ if(!c.municipio)return"Informe o município.";
+ if(!ligacoes.includes(c.ligacao))return"Informe um tipo de ligação válido.";
+ if(!c.categoria)return"Informe a categoria principal.";
+ if(c.categoria==="composicao_mista"&&!c.categoriaMistaBase)return"Informe a categoria residencial principal da composição mista.";
+ if(!binarios.includes(c.conexao))return"Informe a condição de conexão à rede coletora.";
+ if(!binarios.includes(c.rede))return"Informe a disponibilidade de rede coletora.";
+ if(c.ligacao!=="agua"&&!c.destino)return"Informe o destino/forma de esgotamento.";
  for(const [n,v] of [["economias",c.economias],["economias comerciais adicionais",c.comerciais],["economias industriais adicionais",c.industriais]])if(!Number.isFinite(v)||!Number.isInteger(v)||v<0||v>100)return`Quantidade de ${n} inválida.`;
  if(c.economias+c.comerciais+c.industriais<1)return"Informe ao menos uma economia.";
  if(!Number.isInteger(c.li)||!Number.isInteger(c.lf)||c.li<0||c.lf<0)return"As leituras devem ser números inteiros não negativos.";
@@ -589,11 +570,14 @@ function irConfirmacaoAB(){
 }
 function compararBaseAB(a,b,ra,rb){
  if(!ra.ok||!rb.ok)return{comparavel:false,campos:[{nome:"Cálculo A/B",status:"insuficiente",detalhe:"Um ou ambos os cenários não possuem cálculo concluído."}],diferencas:[],insuficiencias:["Cálculo A/B pendente"]};
- const campos=[],norm=v=>normalizarTextoLocal(v),add=(nome,va,vb)=>{if(va===""||vb===""||va==null||vb==null)campos.push({nome,status:"insuficiente",detalhe:"Informação ausente em um dos cenários."});else if(norm(va)===norm(vb))campos.push({nome,status:"coincidencia",detalhe:"Informações coincidentes."});else campos.push({nome,status:"divergencia",detalhe:"Informações diferentes entre A e B."})};
- add("Unidade de Negócio",a.regional,b.regional);add("Município",a.municipio,b.municipio);add("Tipo de ligação",a.ligacao,b.ligacao);add("Categoria tarifária principal",a.categoria,b.categoria);add("Quantidade total de economias",a.economias,b.economias);add("Consumo calculado",ra.consumo,rb.consumo);add("Leitura inicial",a.li,b.li);add("Leitura final",a.lf,b.lf);add("Data inicial da leitura",a.di,b.di);add("Data final da leitura",a.df,b.df);add("Condição de conexão à rede coletora",a.conexao,b.conexao);add("Disponibilidade de rede coletora",a.rede,b.rede);add("Destino/forma de esgotamento",a.destino,b.destino);add("Número do hidrômetro",a.hidrometro,b.hidrometro);
- const fin=["Unidade de Negócio","Município","Tipo de ligação","Categoria tarifária principal","Quantidade total de economias","Consumo calculado","Data inicial da leitura","Data final da leitura","Condição de conexão à rede coletora","Disponibilidade de rede coletora","Destino/forma de esgotamento"];
+ const campos=[],norm=v=>normalizarTextoLocal(v),add=(nome,va,vb)=>{const vazio=va===""||vb===""||va==null||vb==null||(typeof va==="number"&&!Number.isFinite(va))||(typeof vb==="number"&&!Number.isFinite(vb));if(vazio)campos.push({nome,status:"insuficiente",detalhe:"Informação ausente em um dos cenários."});else if(norm(va)===norm(vb))campos.push({nome,status:"coincidencia",detalhe:"Informações coincidentes."});else campos.push({nome,status:"divergencia",detalhe:"Informações diferentes entre A e B."})};
+ add("Unidade de Negócio",a.regional,b.regional);add("Município",a.municipio,b.municipio);add("Tipo de ligação",a.ligacao,b.ligacao);add("Categoria tarifária principal",a.categoria,b.categoria);
+ if(a.categoria==="composicao_mista"||b.categoria==="composicao_mista")add("Categoria residencial da composição mista",a.categoriaMistaBase,b.categoriaMistaBase);
+ add("Quantidade total de economias",ra.totalEconomias,rb.totalEconomias);add("Economias comerciais adicionais",a.comerciais,b.comerciais);add("Economias industriais adicionais",a.industriais,b.industriais);add("Consumo calculado",ra.consumo,rb.consumo);
+ add("Leitura inicial",a.li,b.li);add("Leitura final",a.lf,b.lf);add("Data inicial da leitura",a.di,b.di);add("Data final da leitura",a.df,b.df);add("Condição de conexão à rede coletora",a.conexao,b.conexao);add("Disponibilidade de rede coletora",a.rede,b.rede);add("Destino/forma de esgotamento",a.destino,b.destino);add("Número do hidrômetro",a.hidrometro,b.hidrometro);
+ const fin=["Unidade de Negócio","Município","Tipo de ligação","Categoria tarifária principal","Categoria residencial da composição mista","Quantidade total de economias","Economias comerciais adicionais","Economias industriais adicionais","Consumo calculado","Data inicial da leitura","Data final da leitura","Condição de conexão à rede coletora","Disponibilidade de rede coletora","Destino/forma de esgotamento"];
  const comparavel=campos.filter(x=>fin.includes(x.nome)).every(x=>x.status==="coincidencia");
- return{comparavel,campos,diferencas:campos.filter(x=>x.status==="divergencia").map(x=>x.nome+" diferente"),insuficiencias:campos.filter(x=>x.status==="insuficiente").map(x=>x.nome)};
+ return{comparavel,comparacaoFinanceira:comparavel,campos,diferencas:campos.filter(x=>x.status==="divergencia").map(x=>x.nome+" diferente"),insuficiencias:campos.filter(x=>x.status==="insuficiente").map(x=>x.nome)};
 }
 function executarConferenciaC(){
  if(!estadoFluxoAB.a||!estadoFluxoAB.b){alert("Conclua A e B antes da conferência C.");return false}
@@ -605,13 +589,15 @@ function executarConferenciaC(){
 }
 function renderPainelAlertasD(ra,rb,conf){
  const itens=[];const hs=[ra.alertaHistorico,rb.alertaHistorico].filter(Boolean);
- if(hs.some(x=>x.status==="alerta vermelho"))itens.push(`<div class="alerta-d-item alerta-d-vermelho"><strong>🔴 POSSÍVEL VAZAMENTO</strong>Há consumo acima de 50% da média histórica em pelo menos um cenário. É um sinal de atenção, não confirmação de vazamento.</div>`);
- else if(hs.some(x=>x.status==="atenção amarela"))itens.push(`<div class="alerta-d-item alerta-d-amarelo"><strong>🟡 CONSUMO ACIMA DA MÉDIA</strong>Há consumo acima do limite de atenção histórica em pelo menos um cenário.</div>`);
- else itens.push(`<div class="alerta-d-item alerta-d-verde"><strong>🟢 NORMAL — NESTE CRITÉRIO HISTÓRICO</strong>Não houve alerta histórico nos dados disponíveis. Isso não exclui vazamentos.</div>`);
+ const vermelho=hs.some(x=>x.status==="alerta vermelho"),amarelo=hs.some(x=>x.status==="atenção amarela"),insuficiente=hs.length===0||hs.some(x=>x.status==="não classificado");
+ if(vermelho)itens.push(`<div class="alerta-d-item alerta-d-vermelho"><strong>🔴 POSSÍVEL VAZAMENTO</strong>Há consumo acima de 50% da média histórica em pelo menos um cenário. É um sinal de atenção, não confirmação de vazamento.</div>`);
+ else if(amarelo)itens.push(`<div class="alerta-d-item alerta-d-amarelo"><strong>🟡 CONSUMO ACIMA DA MÉDIA</strong>Há consumo acima do limite de atenção histórica em pelo menos um cenário.</div>`);
+ else if(insuficiente)itens.push(`<div class="alerta-d-item alerta-d-neutro"><strong>🟡 HISTÓRICO INSUFICIENTE / NÃO CLASSIFICADO</strong>Não há dados históricos válidos suficientes para classificar o consumo como normal, acima da média ou possível vazamento. Isso não significa que o consumo esteja normal.</div>`);
+ else itens.push(`<div class="alerta-d-item alerta-d-verde"><strong>🟢 NORMAL — NESTE CRITÉRIO HISTÓRICO</strong>Não houve alerta histórico nos dados válidos disponíveis. Isso não exclui vazamentos.</div>`);
  const div=conf.campos.filter(x=>x.status==="divergencia");
  if(div.length)itens.push(`<div class="alerta-d-item alerta-d-amarelo"><strong>⚠️ CADASTRO/DADOS DIVERGENTES — CONFERIR</strong>${div.map(x=>escaparHTML(x.nome)).join(", ")}. Confira cadastro, categoria, economias e situação do imóvel.</div>`);
  if((ra.alertas||[]).length||(rb.alertas||[]).length)itens.push(`<div class="alerta-d-item alerta-d-neutro"><strong>💩/⚠️ OUTROS PONTOS DE CONFERÊNCIA</strong>${[...(ra.alertas||[]),...(rb.alertas||[])].map(escaparHTML).join("<br>")}</div>`);
- if(div.length||hs.some(x=>x.status==="alerta vermelho"))itens.push(`<div class="alerta-d-item alerta-d-acao"><strong>🚨 SOLICITE REVISÃO DA FATURA</strong>Se a divergência for confirmada, apresente conta, leituras, fotos, protocolos e documentos verificáveis ao canal oficial competente.</div>`);
+ if(div.length||vermelho)itens.push(`<div class="alerta-d-item alerta-d-acao"><strong>🚨 SOLICITE REVISÃO DA FATURA</strong>Se a divergência for confirmada, apresente conta, leituras, fotos, protocolos e documentos verificáveis ao canal oficial competente.</div>`);
  return`<section class="painel-alertas-d"><h3>🚦 PAINEL DE ALERTAS — RELATÓRIO FINAL</h3><div class="alerta-d-legenda"><b>Legenda:</b> 🟢 normal • 🟡 acima da média • 🔴 possível vazamento • ⚠️ divergência para conferir • 🚨 solicitar revisão.</div>${itens.join("")}<div class="alerta-d-legenda">Os alertas são orientativos. Informações ausentes ou insuficientes não são classificadas como normais.</div></section>`;
 }
 function gerarAnalise(){
@@ -637,7 +623,6 @@ function preencherMunicipios(p){
 }
 function atualizarComposicao(p){const cat=document.getElementById(p+"_categoria"),wrap=document.getElementById(p+"_mista_base_wrap");if(wrap)wrap.hidden=!(cat&&cat.value==="composicao_mista")}
 function iniciarSeletoresAB(){
- vincularBotoesDeAcesso();
  ["a","b"].forEach(p=>{const reg=document.getElementById(p+"_regional"),cat=document.getElementById(p+"_categoria");if(reg){reg.addEventListener("change",()=>preencherMunicipios(p));preencherMunicipios(p)}if(cat){cat.addEventListener("change",()=>atualizarComposicao(p));atualizarComposicao(p)}})
  atualizarAcessoSolicitacoes();
 }
